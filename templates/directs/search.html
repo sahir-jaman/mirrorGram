@@ -2,120 +2,108 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<br><br>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
-  <link rel="stylesheet" href="{% static 'assets2/style.css' %}">
-  <title>Instagram Login Form</title>
-</head>
+<style>
+  body {
+    background-color: #00040f;
+    color: white;
+  }
+  .form-data {
+    background-color: #020b1f;
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+  }
+  .headedr__search input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #00bfff;
+    border-radius: 10px;
+    background-color: #020b1f;
+    color: white;
+  }
+  .headedr__search button {
+    background-color: #00bfff;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-left: 10px;
+  }
+  .side-menu__user-profile {
+    background-color: #06142e;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border: 1px solid #112240;
+    border-radius: 20px;
+    margin-bottom: 15px;
+  }
+  .side-menu__user-avatar img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .side-menu__user-idnfo a {
+    color: #00bfff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .side-menu__user-idnfo span {
+    color: #bbb;
+  }
+  footer {
+    margin-top: 40px;
+    color: #888;
+  }
+  footer a {
+    color: #00bfff;
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+</style>
 
-<body>
+<div class="container mt-5">
+  <div class="form-data">
 
-  <div id="wrapper">
-    <div class="container">
-      <div class="phone-app-ddemo"></div>
-      <div class="form-data">
-        
-        <form action="" method="GET">
-            <div class="headedr__search">
-                <input type="text" placeholder="Search" name="q" value="{{ request.GET.q }}">
-                <button class="btn btn-primary" type="submit">Search</button>
-                
-            </div>
-        </form>
-
-        <form action="" method="POST" enctype="multipart/form-data">
-          <div class="logo">
-            <h3 style="padding-top: 5px; font-size: 20px;">Search Results</h3>
-          </div>
-
-        {% for user in users %}
-            <div class="side-menu__user-profile" style="text-align: start; border: solid rgba(192, 192, 192, 0.514) 1px; padding: 10px; border-radius: 25px;">
-                <a href="{% url 'profile' user.username %}" class="side-menu__user-avatar">
-                    {% if user.profile.image.url %}
-                    <img src="{{ user.profile.image.url }}" alt="User Picture">
-                    {% else %}
-                    <img src="{% static 'assets1/default.jpg' %}" alt="User Picture">
-
-                    {% endif %}
-                </a>
-                <div class="side-menu__user-idnfo">
-                    {% if user.profile.first_name %}
-                    <a href="{% url 'profile' user.username %}" style="font-size: 15px; color: black; text-align: center;">{{user.profile.first_name|title }} {{user.profile.last_name|title }}</a>
-                    {% else%}
-                    <a href="{% url 'profile' user.username %}">Instagram User</a>
-
-                    {% endif %}
-                    <br>
-                    <span style="font-size: 14px;">@{{user.username}}</span>
-                    <br>
-                    <a href="{% url 'profile' user.username %}" style="color: blue;" class="side-menu__user-button">View Profile</a>
-
-                </div>
-            </div>
-            <!-- <hr> -->
-        {% endfor %}
-        
-          
-        </form>
-        
+    <form action="" method="GET">
+      <div class="headedr__search mb-4">
+        <input type="text" placeholder="Search" name="q" value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
       </div>
-    </div>
+    </form>
 
-    <footer>
-      <div class="container">
-        <nav class="footer-nav">
-          <ul>
-            <li>
-              <a href="#">About us</a>
-            </li>
-            <li>
-              <a href="#">Support</a>
-            </li>
-            <li>
-              <a href="#">Press</a>
-            </li>
-            <li>
-              <a href="#">Api</a>
-            </li>
-            <li>
-              <a href="#">Jobs</a>
-            </li>
-            <li>
-              <a href="#">Privacy</a>
-            </li>
-            <li>
-              <a href="#">Terms</a>
-            </li>
-            <li>
-              <a href="#">Directory</a>
-            </li>
-            <li>
-              <a href="#">Profiles</a>
-            </li>
-            <li>
-              <a href="#">Hashtags</a>
-            </li>
-            <li>
-              <a href="#">Languages</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="copyright-notice">
-          &copy 2019 Instagram
+    <h3 style="color: #00bfff;">Search Results</h3>
+
+    {% for user in users %}
+      <div class="side-menu__user-profile">
+        <a href="{% url 'profile' user.username %}" class="side-menu__user-avatar">
+          {% if user.profile.image.url %}
+            <img src="{{ user.profile.image.url }}" alt="User Picture">
+          {% else %}
+            <img src="{% static 'assets1/default.jpg' %}" alt="User Picture">
+          {% endif %}
+        </a>
+        <div class="side-menu__user-idnfo">
+          {% if user.profile.first_name %}
+            <a href="{% url 'profile' user.username %}">
+              {{ user.profile.first_name|title }} {{ user.profile.last_name|title }}
+            </a><br>
+          {% else %}
+            <a href="{% url 'profile' user.username %}">Instagram User</a><br>
+          {% endif %}
+          <span>@{{ user.username }}</span><br>
+          <a href="{% url 'profile' user.username %}" class="side-menu__user-button">View Profile</a>
         </div>
       </div>
-    </footer>
+    {% empty %}
+      <p style="color: #888;">No users found.</p>
+    {% endfor %}
 
   </div>
+</div>
 
-</body>
-
-</html>
 {% endblock content %}
