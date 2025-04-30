@@ -3,9 +3,9 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <br><br>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,7 +47,6 @@
     }
 
     input[type="file"] {
-      background-color: #121212;
       padding: 0.5rem;
     }
 
@@ -60,6 +59,7 @@
       border-radius: 8px;
       font-weight: bold;
       transition: background-color 0.3s ease;
+      cursor: pointer;
     }
 
     .form-btn:hover {
@@ -101,17 +101,16 @@
     }
   </style>
 </head>
-
 <body>
+
   <div class="container">
     <div class="logo">
       <h3>Create New Post</h3>
     </div>
-    <form action="" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.picture }}
-      {{ form.caption }}
-      {{ form.tags }}
+    <form action="#" method="POST" enctype="multipart/form-data">
+      <input type="file" name="picture" accept="image/*" required />
+      <input type="text" name="caption" placeholder="Write a caption..." />
+      <input type="text" name="tags" placeholder="Add tags..." />
       <button class="form-btn" type="submit">Post</button>
     </form>
   </div>
@@ -129,11 +128,12 @@
         </ul>
       </nav>
       <div class="copyright-notice">
-        &copy; 2025 InstaClone
+        &copy; 2025 sahir
       </div>
     </div>
   </footer>
-</body>
 
+</body>
 </html>
+
 {% endblock content %}
