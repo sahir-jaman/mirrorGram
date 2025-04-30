@@ -44,7 +44,10 @@
 
                         {% if request.user.is_authenticated and request.user == profile.user %}
                         <a style="text-decoration: none;" href="{% url 'editprofile' %}" class="btn profile-edit-btn">Edit Profile</a>
-                        <a style="text-decoration: none;" href="{% url 'sign-out' %}" class="btn profile-edit-btn">Logout</a>
+                        <form action="{% url 'sign-out' %}" method="post" style="display: inline-block">
+                            {% csrf_token %}
+                            <button class="btn profile-edit-btn" type="submit">Logout</button>
+                        </form>
                         <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
 
                         

@@ -2,74 +2,189 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
-  <link rel="stylesheet" href="{% static 'assets2/style.css' %}">
-  <title>Instagram | Register</title>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://kit.fontawesome.com/fc1e235b2e.js" crossorigin="anonymous"></script>
+  <title>MirrorGram | Register</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #0a0f1a, #0f172a);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
+    #wrapper {
+      background: #101828;
+      width: 420px;
+      padding: 40px 30px;
+      border-radius: 14px;
+      box-shadow: 0 0 20px rgba(0, 123, 255, 0.25);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 140px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input {
+      background: #0f1c2e;
+      border: 1px solid #1e293b;
+      padding: 12px 14px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 5px rgba(59, 130, 246, 0.6);
+    }
+
+    .form-btn {
+      padding: 12px;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-size: 15px;
+    }
+
+    .form-btn:hover {
+      background: #2563eb;
+    }
+
+    .alert {
+      background-color: #1e293b;
+      border-left: 5px solid #3b82f6;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+
+    .alert-danger {
+      border-color: #ef4444;
+    }
+
+    .alert-success {
+      border-color: #22c55e;
+    }
+
+    .sign-up {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .sign-up a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .get-the-app {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .get-the-app span {
+      display: block;
+      margin-bottom: 10px;
+      color: #94a3b8;
+    }
+
+    .badges img {
+      width: 130px;
+      margin: 5px;
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 480px) {
+      #wrapper {
+        width: 90%;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
 <body>
 
   <div id="wrapper">
-    <div class="container">
-      <div class="phone-app-demo"></div>
-      <div class="form-data">
-        <form action="" method="POST">
-          {% csrf_token %}
-        
-          <div class="logo">
-            <img src="{% static 'assets2/images/logo.png' %}" alt="logo">
-          </div>
-        
-          <!-- Display form validation errors -->
-          {% if form.errors %}
-            <div class="alert alert-danger">
-              <ul>
-                {% for field in form %}
-                  {% for error in field.errors %}
-                    <li>{{ field.label }}: {{ error }}</li>
-                  {% endfor %}
-                {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-        
-          {{ form.username }}
-          {{ form.email }}
-          {{ form.password1 }}
-          {{ form.password2 }}
-        
-          <button class="form-btn" type="submit">Sign Up</button>
-        </form>
-        
-        <!-- Display success messages -->
-        {% if messages %}
-          {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-              {{ message }}
-            </div>
-          {% endfor %}
-        {% endif %}
-        <div class="sign-up">
-          Already have an account? <a href="{% url 'sign-in' %}">Sign In</a>
-        </div>
-        <div class="get-the-app">
-          <span>Get the app.</span>
-          <div class="badges">
-            <img src="{% static 'assets2/images/app-store.png' %}" alt="app-store badge">
-            <img src="{% static 'assets2/images/google-play.png' %}" alt="google-play badge">
-          </div>
-        </div>
-      </div>
+    <div class="logo" style="text-align: center;">
+      <h2 style="font-size: 2.5rem; margin: 0;">
+        <span style="font-family: 'Great Vibes', cursive; color: #ff5e8e; font-weight: 400;">
+          MirrorGram
+        </span>
+      </h2>
+      <!-- Add the font link in your <head> -->
+      <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     </div>
 
+    <form action="" method="POST">
+      {% csrf_token %}
+      
+      {% if form.errors %}
+      <div class="alert alert-danger">
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ field.label }}: {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
 
+      {{ form.username }}
+      {{ form.email }}
+      {{ form.password1 }}
+      {{ form.password2 }}
+
+      <button class="form-btn" type="submit">Sign Up</button>
+    </form>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="sign-up">
+      Already have an account? <a href="{% url 'sign-in' %}">Sign In</a>
+    </div>
+
+    <div class="get-the-app">
+      <span>Get the app.</span>
+      <div class="badges">
+        <img src="{% static 'assets2/images/app-store.png' %}" alt="App Store">
+        <img src="{% static 'assets2/images/google-play.png' %}" alt="Google Play">
+      </div>
+    </div>
   </div>
 
 </body>
-
 </html>
