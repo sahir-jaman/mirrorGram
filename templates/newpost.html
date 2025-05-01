@@ -4,136 +4,125 @@
 {% block content %}
 <br><br>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Post</title>
-  <script src="https://kit.fontawesome.com/fc1e235b2e.js"></script>
-  <style>
-    body {
-      background-color: #0f0f0f;
-      color: #e0e0e0;
-      font-family: 'Segoe UI', sans-serif;
-    }
+<style>
+  body {
+    background-color: #0f0f0f;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+  }
 
+  .container {
+    max-width: 500px;
+    margin: auto;
+    background-color: #1a1a1a;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+  }
+
+  .logo h3 {
+    text-align: center;
+    color: #3b82f6;
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+
+  input[type="file"],
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  input[type="file"] {
+    padding: 0.5rem;
+  }
+
+  .form-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .form-btn:hover {
+    background-color: #2563eb;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 4rem;
+    color: #777;
+    font-size: 0.9rem;
+  }
+
+  .footer-nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-nav a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+
+  .footer-nav a:hover {
+    color: #3b82f6;
+  }
+
+  @media (max-width: 576px) {
     .container {
-      max-width: 500px;
-      margin: auto;
-      background-color: #1a1a1a;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+      margin: 1rem;
+      padding: 1.5rem;
     }
+  }
+</style>
 
-    .logo h3 {
-      text-align: center;
-      color: #3b82f6;
-      font-size: 24px;
-      margin-bottom: 1.5rem;
-    }
-
-    input[type="file"],
-    input[type="text"],
-    textarea {
-      width: 100%;
-      padding: 0.7rem;
-      margin-bottom: 1rem;
-      border: 1px solid #333;
-      border-radius: 8px;
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-
-    input[type="file"] {
-      padding: 0.5rem;
-    }
-
-    .form-btn {
-      width: 100%;
-      padding: 0.75rem;
-      background-color: #3b82f6;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-      cursor: pointer;
-    }
-
-    .form-btn:hover {
-      background-color: #2563eb;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 4rem;
-      color: #777;
-      font-size: 0.9rem;
-    }
-
-    .footer-nav ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-nav a {
-      color: #aaa;
-      text-decoration: none;
-      font-size: 0.85rem;
-    }
-
-    .footer-nav a:hover {
-      color: #3b82f6;
-    }
-
-    @media (max-width: 576px) {
-      .container {
-        margin: 1rem;
-        padding: 1.5rem;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <div class="logo">
-      <h3>Create New Post</h3>
-    </div>
-    <form action="#" method="POST" enctype="multipart/form-data">
-      <input type="file" name="picture" accept="image/*" required />
-      <input type="text" name="caption" placeholder="Write a caption..." />
-      <input type="text" name="tags" placeholder="Add tags..." />
-      <button class="form-btn" type="submit">Post</button>
-    </form>
+<div class="container">
+  <div class="logo">
+    <h3>Create New Post</h3>
   </div>
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.picture }}
+    {{ form.caption }}
+    {{ form.tags }}
+    <button class="form-btn" type="submit">Post</button>
+  </form>
+</div>
 
-  <footer>
-    <div class="container">
-      <nav class="footer-nav">
-        <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="#">Privacy</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">Directory</a></li>
-          <li><a href="#">Language</a></li>
-        </ul>
-      </nav>
-      <div class="copyright-notice">
-        &copy; 2025 sahir
-      </div>
+<footer>
+  <div class="container">
+    <nav class="footer-nav">
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Support</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Directory</a></li>
+        <li><a href="#">Language</a></li>
+      </ul>
+    </nav>
+    <div class="copyright-notice">
+      &copy; 2025 sahir
     </div>
-  </footer>
-
-</body>
-</html>
+  </div>
+</footer>
 
 {% endblock content %}
